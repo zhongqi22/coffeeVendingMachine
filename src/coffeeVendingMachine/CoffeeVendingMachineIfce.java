@@ -5,5 +5,5 @@ public interface CoffeeVendingMachineIfce {
 	public void setSize(String size);
 	public void addTopping(String topping);
 	public Beverage getCoffee();
-	public void placeOrder();
+	public void placeOrder() throws InterruptedException;
 }

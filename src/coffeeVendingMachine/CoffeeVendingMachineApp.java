@@ -4,23 +4,24 @@ import java.util.Scanner;
 
 public class CoffeeVendingMachineApp {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public static void main(String[] args) throws InterruptedException{
+
 		CoffeeVendingMachineIfce machine = new CoffeeVendingMachine();
 		Scanner sc = new Scanner(System.in);
+		int coffeeType;
+		int sizeCoffee;
+		int topping=0;
 		
-		machine: while(true) {
 		System.out.println("***************** Coffee Vending Machine *****************\n");
-			cType: while(true) {
-				System.out.println("======== Type of Coffee ========");
-				System.out.println("[1] DarkRoast");
-				System.out.println("[2] Espresso");
-				System.out.println("[3] House of blend");
-				System.out.println("\n[0] Exit");
-				System.out.println("================================");
-				System.out.print("Enter your choice: ");
-				int coffeeType = sc.nextInt();
 			
+				System.out.println("Which type of coffee do you want?");
+				System.out.println("[1] Dark Roast");
+				System.out.println("[2] Espresso");
+				System.out.println("[3] House Blend");
+				System.out.print("\nEnter your choice: ");
+				coffeeType = sc.nextInt();
+				
+				cType: while(true) {
 				switch (coffeeType) {
 					case 1:
 						machine.setCoffee("DARKROAST");
@@ -29,27 +30,25 @@ public class CoffeeVendingMachineApp {
 						machine.setCoffee("ESPRESSO");
 						break cType;
 					case 3:
-						machine.setCoffee("HOUSE OF BLEND");
+						machine.setCoffee("HOUSEBLEND");
 						break cType;
-					case 0:
-						break machine;
 				
 					default:
-						System.out.println("Invalid input, please enter again: ");
+						System.out.print("\nInvalid input, please enter again: ");
+						coffeeType = sc.nextInt();
 						continue;
 				}
 			}
 		
-			cSize: while(true) {
-				System.out.println("======== Size of Coffee ========");
+			
+				System.out.println("Please choose a size for your coffee.");
 				System.out.println("[1] TALL");
 				System.out.println("[2] GRANDE");
 				System.out.println("[3] VENTI");
-				System.out.println("\n[0] Exit");
-				System.out.println("================================");
-				System.out.print("Enter your choice: ");
-				int sizeCoffee = sc.nextInt();
-			
+				System.out.print("\nEnter your choice: ");
+				sizeCoffee = sc.nextInt();
+				
+				cSize: while(true) {
 				switch (sizeCoffee) {
 					case 1:
 						machine.setSize("TALL");
@@ -63,57 +62,61 @@ public class CoffeeVendingMachineApp {
 						machine.setSize("VENTI");
 						break cSize;
 				
-					case 0:
-						break machine;
-				
 					default:
-						System.out.println("Invalid input, please enter again: ");
+						System.out.print("\nInvalid input, please enter again:");
+						sizeCoffee = sc.nextInt();
 						continue;
 				}
 			}
 		
-			cTopping: while(true) {
-				System.out.println("=========== Toppings ===========");
+
+				
+				System.out.println("Topping?");
 				System.out.println("[1] Milk");
 				System.out.println("[2] Soy");
 				System.out.println("[3] Mocha");
 				System.out.println("[4] Whip");
 				System.out.println("[5] No Topping");
-				System.out.println("\n[6] Confirm Toppings");
-				System.out.println("[0] Exit");
-				System.out.println("================================");
-				System.out.print("Enter your choice: ");
-			
-				int topping = sc.nextInt();
-			
+				System.out.println("\n[0] Confirm Toppings");
+				System.out.print("\nEnter your choice: ");
+				topping = sc.nextInt();
+				
+				cTopping: while(topping!=5 || topping!=0) {
+
 				switch (topping) {
 					case 1:
 						machine.addTopping("MILK");
+						System.out.print("Anymore? ");
+						topping = sc.nextInt();
 						continue;
 				
 					case 2:
 						machine.addTopping("SOY");
+						System.out.print("Anymore? ");
+						topping = sc.nextInt();
 						continue;
 				
 					case 3:
 						machine.addTopping("MOCHA");
+						System.out.print("Anymore? ");
+						topping = sc.nextInt();
 						continue;
 				
 					case 4:
 						machine.addTopping("WHIP");
+						System.out.print("Anymore? ");
+						topping = sc.nextInt();
 						continue;
 				
 					case 5:
 						break cTopping;
 				
-					case 6:
-						break cTopping;
-						
 					case 0:
-						break machine;
+						break cTopping;
 				
 					default:
-						System.out.println("Invalid input, please enter again: ");
+						System.out.print("\nInvalid input, please enter again: ");
+						topping = sc.nextInt();
 						continue;
 				}
 			}
@@ -122,25 +125,26 @@ public class CoffeeVendingMachineApp {
 				System.out.println("\n\n========= Your Coffee ==========");
 				System.out.println(machine.getCoffee());
 				System.out.println("\n[1] Confirm and Place Order");
-				System.out.println("[0] Exit");
-				System.out.println("================================");
-				System.out.print("Enter your choice: ");
+				System.out.print("\nEnter your choice: ");
 			
 				int choice = sc.nextInt();
 			
-				switch (choice) {
-					case 1:
-						machine.placeOrder();
-						break placeOrder;
-				
-					case 0:
-						break machine;
-				
-					default:
-						System.out.println("Invalid input, please enter again: ");
-						continue;
+				try {
+					switch (choice) {
+						case 1:
+							machine.placeOrder();
+							break placeOrder;
+							
+						default:
+							System.out.println("\nInvalid input, please enter again: \n");
+							continue;
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
+			
+			sc.close();
 		}
-	}
 }

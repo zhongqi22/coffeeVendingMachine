@@ -50,10 +50,13 @@ public class CoffeeVendingMachine implements CoffeeVendingMachineIfce{
 		System.out.println("\n------> "  + coffee.getDescription() + "\n");
 	}
 	
-	public void placeOrder() {
+	public void placeOrder() throws InterruptedException {
 		System.out.println("\n\nDispensing cup...");
-		System.out.println("Filling coffee...");
+		Thread.sleep(1000);
+		System.out.println("Filling it up with coffee...");
+		Thread.sleep(1000);
 		System.out.println("Adding Topping...");
+		Thread.sleep(1000);
 		System.out.println("There you go!\n");
 	}
 }
