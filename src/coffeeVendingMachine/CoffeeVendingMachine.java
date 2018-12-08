@@ -58,5 +58,6 @@ public class CoffeeVendingMachine implements CoffeeVendingMachineIfce{
 		System.out.println("Adding Topping...");
 		Thread.sleep(1000);
 		System.out.println("There you go!\n");
+		Thread.sleep(2000);
 	}
 }
